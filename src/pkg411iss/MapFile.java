@@ -9,18 +9,16 @@ import javafx.scene.image.Image;
 
 public class MapFile {
 
-    private String lat;
-    private String lon;
+    private ISSPosition pos;
 
-    public MapFile(String lat, String lon) {
-        this.lat = lat;
-        this.lon = lon;
+    public MapFile(ISSPosition pos) {
+        this.pos = pos;
 
     }
 
     public Image getMap() throws IOException {
-        String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=9&size=800x500&maptype=roadmap"
-                + "&markers=color:red%7Clabel:A%7C"+lat+","+lon
+        String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + pos.getLat() + "," + pos.getLon() + "&zoom=3&size=700x700&maptype=roadmap"
+                + "&markers=color:red%7Clabel:A%7C"+pos.getLat() +","+ pos.getLon()
                 + "&key=AIzaSyDRsDsxhA3xHzjbEW7xDFsS6V26tlPwqtU";
         System.out.println(imageUrl);
         

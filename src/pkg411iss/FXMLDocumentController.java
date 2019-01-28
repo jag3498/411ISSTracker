@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -28,20 +29,33 @@ public class FXMLDocumentController implements Initializable {
     private ImageView mapImage;
      
      Image img;     
+     ISSPosition pos;
      
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        MapFile map = new MapFile("1","1");
+        
+        ISSProvider iss = new ISSProvider();
+        
+       
+         try {
+             pos = iss.getISS();
+             
+         } catch (IOException | ParseException ex) {
+         }
+
+        
+        MapFile map = new MapFile(pos);
                 
          try {
              img = map.getMap();
          } catch (IOException ex) {
-             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
          }
         
         mapImage.setImage(img);
+        
+        
         
         
     }    
