@@ -1,7 +1,7 @@
 # 411ISSTracker
 ISS Tracker for IST 411 Course
 
-Direction:
+Directions:
 To get this running, just pull from git and open that folder as a project in netbeans.
 At first, it wont run. You have to create a class called "APIKey" with one method "public String getAPIKey()".
 Have that method return the api key (get it from Jack).
