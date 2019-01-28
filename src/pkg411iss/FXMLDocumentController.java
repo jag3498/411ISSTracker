@@ -7,10 +7,15 @@ package pkg411iss;
 
 import java.io.IOException;
 import java.net.URL;
+import javafx.util.Duration;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,41 +28,60 @@ import org.json.simple.parser.ParseException;
  * @author Jack
  */
 public class FXMLDocumentController implements Initializable {
-    
-    
-     @FXML
+
+    @FXML
     private ImageView mapImage;
-     
-     Image img;     
-     ISSPosition pos;
-     
-    
+
+    Image img;
+    ISSPosition pos;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
+
         ISSProvider iss = new ISSProvider();
-        
-       
-         try {
-             pos = iss.getISS();
-             
-         } catch (IOException | ParseException ex) {
-         }
+        try {
+            pos = iss.getISS();
+
+        } catch (IOException | ParseException ex) {
+        }
+        MapFile map = new MapFile(pos);
+        try {
+            img = map.getMap();
+        } catch (IOException ex) {
+        }
+        mapImage.setImage(img);
 
         
-        MapFile map = new MapFile(pos);
-                
-         try {
-             img = map.getMap();
-         } catch (IOException ex) {
-         }
-        
-        mapImage.setImage(img);
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(1), (ActionEvent actionEvent) -> {
+                    update();
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
         
         
         
         
-    }    
+    }
     
+
+    
+    public void update() {
+        ISSProvider iss = new ISSProvider();
+        try {
+            pos = iss.getISS();
+
+        } catch (IOException | ParseException ex) {
+        }
+
+        MapFile map = new MapFile(pos);
+
+        try {
+            img = map.getMap();
+        } catch (IOException ex) {
+        }
+
+        mapImage.setImage(img);
+    }
+
 }
