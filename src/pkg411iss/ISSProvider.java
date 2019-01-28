@@ -13,7 +13,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
@@ -23,7 +22,7 @@ import org.json.simple.parser.JSONParser;
  */
 public class ISSProvider {
 
-    public ISSPosition getISS() throws ProtocolException, IOException, ParseException {
+    public Position getISS() throws ProtocolException, IOException, ParseException {
 
         URL url = new URL("http://api.open-notify.org/iss-now.json");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -36,28 +35,25 @@ public class ISSProvider {
         try (BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()))) {
             StringBuilder content = new StringBuilder();
-            
+
             inputLine = in.readLine();
-                content.append(inputLine);
-            
+            content.append(inputLine);
+
         }
-        
+
         // parser = new JSONParser();
+        JSONParser parser = new JSONParser();
 
-            JSONParser parser = new JSONParser();
-        
-            Object parsed = parser.parse(inputLine);
-          
-            JSONObject jsonObject = (JSONObject) parsed;
-            JSONObject jsonChildObject = (JSONObject)jsonObject.get("iss_position");
+        Object parsed = parser.parse(inputLine);
 
-            String lat = (String) jsonChildObject.get("latitude");
-            String lon = (String) jsonChildObject.get("longitude");
-            
-            ISSPosition pos = new ISSPosition(lat, lon);
-            
-            
-        
+        JSONObject jsonObject = (JSONObject) parsed;
+        JSONObject jsonChildObject = (JSONObject) jsonObject.get("iss_position");
+
+        String lat = (String) jsonChildObject.get("latitude");
+        String lon = (String) jsonChildObject.get("longitude");
+
+        Position pos = new Position(lat, lon);
+
         return pos;
     }
 

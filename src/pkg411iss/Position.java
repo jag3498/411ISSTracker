@@ -9,12 +9,12 @@ package pkg411iss;
  *
  * @author Jack
  */
-public class ISSPosition {
+public class Position {
     
     private String lat;
     private String lon;
 
-    public ISSPosition(String lat, String lon) {
+    public Position(String lat, String lon) {
         this.lat = lat;
         this.lon = lon;
     }
