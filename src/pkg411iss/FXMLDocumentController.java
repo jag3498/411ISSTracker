@@ -48,7 +48,7 @@ public class FXMLDocumentController implements Initializable {
         mapImage.setImage(img);
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(1), (ActionEvent actionEvent) -> {
+                new KeyFrame(Duration.seconds(5), (ActionEvent actionEvent) -> {
                     update();
                 }));
         timeline.setCycleCount(Animation.INDEFINITE);

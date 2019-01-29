@@ -41,7 +41,6 @@ public class ISSProvider {
 
         }
 
-        // parser = new JSONParser();
         JSONParser parser = new JSONParser();
 
         Object parsed = parser.parse(inputLine);
