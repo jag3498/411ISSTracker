@@ -3,7 +3,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="750" prefWidth="750" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg411iss.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="750" prefWidth="750" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkg411iss.FXMLDocumentController">
    <children>
       <ImageView fx:id="mapImage" fitHeight="500" fitWidth="500" layoutX="125.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" />
    </children>
