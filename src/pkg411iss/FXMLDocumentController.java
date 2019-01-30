@@ -47,6 +47,7 @@ public class FXMLDocumentController implements Initializable {
         }
         mapImage.setImage(img);
 
+        //display google maps image
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(5), (ActionEvent actionEvent) -> {
                     update();
@@ -57,6 +58,8 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void update() {
+        
+        //update ISS location
         ISSProvider iss = new ISSProvider();
         try {
             pos = iss.getISS();
