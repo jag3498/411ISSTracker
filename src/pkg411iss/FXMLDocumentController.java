@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import javafx.scene.text.*;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -27,6 +28,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private ImageView mapImage;
+    @FXML
+    private Text latitude, longitude;
 
     Image img;
     Position pos;
@@ -60,6 +63,7 @@ public class FXMLDocumentController implements Initializable {
         ISSProvider iss = new ISSProvider();
         try {
             pos = iss.getISS();
+            updateLatLong(pos);
 
         } catch (IOException | ParseException ex) {
         }
@@ -72,6 +76,16 @@ public class FXMLDocumentController implements Initializable {
         }
 
         mapImage.setImage(img);
+    }
+    
+    /**
+     * This method updats the UI elements, latitude and longitude with the current values.
+     */
+    private void updateLatLong(Position current){
+        latitude.setText(current.getLat());
+        longitude.setText(current.getLon());
+        System.out.println("Lat: " + current.getLat());
+        System.out.println("Long: " + current.getLon());
     }
 
 }
