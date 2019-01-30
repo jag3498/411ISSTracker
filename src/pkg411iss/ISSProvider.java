@@ -55,5 +55,48 @@ public class ISSProvider {
 
         return pos;
     }
+    
+    /**
+     * 
+     * @param lat the latitude entered
+     * @param lon the longitude entered
+     * @return a string value stating the date and time it will return. 
+     * @throws ProtocolException
+     * @throws IOException
+     * @throws ParseException 
+     */
+    public RiseTime nextPass(String lat, String lon) throws ProtocolException, IOException, ParseException{
+        URL url = new URL("http://api.open-notify.org/iss-pass.json?lat=" + lat + "&lon=" + lon + "&n=1");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type", "application/json");
+
+        int status = con.getResponseCode();
+
+        String inputLine;
+        try (BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()))) {
+            StringBuilder content = new StringBuilder();
+
+            inputLine = in.readLine();
+            content.append(inputLine);
+
+        }
+
+        JSONParser parser = new JSONParser();
+
+        Object parsed = parser.parse(inputLine);
+
+        JSONObject jsonObject = (JSONObject) parsed;
+        JSONObject jsonChildObject = (JSONObject) jsonObject.get("response");
+
+        String newTime = (String) jsonChildObject.get("risetime");
+        
+        RiseTime riseTime = new RiseTime(newTime);
+        
+        return riseTime;
+
+        
+    }
 
 }
