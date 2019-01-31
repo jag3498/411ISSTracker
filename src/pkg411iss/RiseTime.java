@@ -38,8 +38,10 @@ public class RiseTime {
      * @return the riseTime, translates it from a string timestamp, to a date. 
      */
     public Date getDateTime() {
-        long riseTimeAsLong = Long.parseLong(riseTime);    
+        long riseTimeAsLong = Long.parseLong(riseTime)*1000; 
+        
         Date theDateTime = new Date(riseTimeAsLong);
+        
         return theDateTime;
     }
     

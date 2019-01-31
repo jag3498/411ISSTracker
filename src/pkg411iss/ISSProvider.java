@@ -74,26 +74,34 @@ public class ISSProvider {
 
         int status = con.getResponseCode();
 
+        StringBuilder content = new StringBuilder();
         String inputLine;
         try (BufferedReader search = new BufferedReader(
                 new InputStreamReader(con.getInputStream()))) {
-            StringBuilder content = new StringBuilder();
 
-            inputLine = search.readLine();
-            content.append(inputLine);
+
+            while ((inputLine = search.readLine()) != null) {
+                content.append(inputLine);
+            }
+            search.close();
 
         }
 
         JSONParser parser = new JSONParser();
 
-        Object parsed = parser.parse(inputLine);
+        Object parsed = parser.parse(content.toString());
+        
         //JSONObject jsonObject = (JSONObject) parsed;
         //JSONArray jasonArray = jsonObject.getJSONArray("response");
+        
         JSONObject jsonObject = (JSONObject) parsed;
+        
         JSONArray jsonArray = (JSONArray) jsonObject.get("response");
-        Object jsonArrayMember = jsonArray.get(0);
+        JSONObject jsonArrayMember = (JSONObject) jsonArray.get(0);
+        
         System.out.println(jsonArrayMember);
-        String newTime = (String) jsonArrayMember;
+        
+        String newTime = jsonArrayMember.get("risetime").toString();
         
         RiseTime riseTime = new RiseTime(newTime);
         
