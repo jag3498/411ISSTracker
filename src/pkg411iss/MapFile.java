@@ -15,7 +15,8 @@ public class MapFile {
         this.pos = pos;
 
     }
-
+    
+    //get map image from google maps API
     public Image getMap() throws IOException {
         
         APIKey key = new APIKey();
@@ -36,7 +37,7 @@ public class MapFile {
 
     }
 
-    private static void saveImage(String imageUrl, String destinationFile) throws IOException {
+       private static void saveImage(String imageUrl, String destinationFile) throws IOException {
         URL url = new URL(imageUrl);
         InputStream in = url.openStream();
         OutputStream out = new FileOutputStream(destinationFile);

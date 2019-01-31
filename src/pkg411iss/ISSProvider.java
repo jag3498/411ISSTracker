@@ -23,6 +23,7 @@ import org.json.simple.parser.JSONParser;
  */
 public class ISSProvider {
 
+    //get ISS position JSON from ISS API
     public Position getISS() throws ProtocolException, IOException, ParseException {
 
         URL url = new URL("http://api.open-notify.org/iss-now.json");
@@ -42,6 +43,7 @@ public class ISSProvider {
 
         }
 
+        //parse JSON for coordinatesd
         JSONParser parser = new JSONParser();
 
         Object parsed = parser.parse(inputLine);
