@@ -29,6 +29,6 @@
       <TextField fx:id="longitude" layoutX="151.0" layoutY="191.0" prefHeight="25.0" prefWidth="345.0" promptText="77.8599" />
       <Button fx:id="back" layoutX="30.0" layoutY="29.0" mnemonicParsing="false" onAction="#loadMapPage" text="Back" />
       <Button fx:id="lookUpTime" layoutX="496.0" layoutY="232.0" mnemonicParsing="false" onAction="#lookUpTime" text="Look Up Time" />
-      <Label fx:id="responseField" layoutX="125.0" layoutY="257.0" prefHeight="91.0" prefWidth="362.0" text="Waiting For Search" />
+      <Label fx:id="responseField" layoutX="125.0" layoutY="257.0" prefHeight="91.0" prefWidth="362.0" text="Waiting For Search" wrapText="true" />
    </children>
 </AnchorPane>

@@ -5,6 +5,7 @@
  */
 package pkg411iss;
 
+import com.sun.deploy.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,11 +53,19 @@ public class LocationPredictionController implements Initializable {
     public void lookUpTime(){
         ISSProvider iss = new ISSProvider();
         try{
-            //********these have example fields, map them to the correct ones.********************************
-            //********need to match the values the user inputs***************
-        RiseTime riseTime = iss.nextPass("60","60");
+            if(StringContainsOnlyNumbers(latitude.getText()) &&
+                    StringContainsOnlyNumbers(longitude.getText()))
+            {
+                String lat = latitude.getText();
+                String lon = longitude.getText();
+                RiseTime riseTime = iss.nextPass(lat,lon);
         
         System.out.println("Rise Time" + riseTime.getDateTime());
+            }else { 
+                responseField.setText("Error, please use a valid latitude and longitude. \n Proper values fall between 90 and -90, excluding 0");
+            }
+            
+            
         
         }catch(IOException | ParseException ex){
             ex.printStackTrace();
@@ -65,6 +74,15 @@ public class LocationPredictionController implements Initializable {
         //************************Add input sanitization here, only numbers allowed in string******************************
         
         
+    }
+    
+    public boolean StringContainsOnlyNumbers(String str){
+        try{
+            double d = Double.parseDouble(str);
+        }catch(NumberFormatException ex){
+            return false;
+        }
+        return true;
     }
     
 }
