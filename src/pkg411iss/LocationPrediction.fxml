@@ -14,7 +14,7 @@
             <Font name="Candara" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="109.0" layoutY="72.0" prefHeight="43.0" prefWidth="382.0" text="This page will tell you the time untill the ISS is overhead a Location. Please enter a Latitude and Longitude." textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="109.0" layoutY="72.0" prefHeight="61.0" prefWidth="382.0" text="This page will tell you the time untill the ISS is overhead a Location. Please enter a Latitude and Longitude. For example, State College is 40.7934, 77.8600" textAlignment="CENTER" wrapText="true" />
       <Label layoutX="56.0" layoutY="155.0" text="Latitude:">
          <font>
             <Font size="18.0" />

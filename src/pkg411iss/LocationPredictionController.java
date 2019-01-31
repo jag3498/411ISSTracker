@@ -67,7 +67,7 @@ public class LocationPredictionController implements Initializable {
                    DateFormat dateFormat = new SimpleDateFormat("yyy-mm-dd hh:mm:ss");
                    String strRiseTime = dateFormat.format(riseTime.getDateTime());
                    
-                   responseField.setText("The next pass will be: " + strRiseTime);
+                   responseField.setText("The next pass will be: " + riseTime.getDateTime());
                     System.out.println("Rise Time" + riseTime.getDateTime()); 
                 }else{
                     responseField.setText("Error, please use a valid latitude and longitude. \n Proper values fall between 90 and -90, excluding 0");
