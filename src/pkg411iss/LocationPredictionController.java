@@ -5,6 +5,7 @@
  */
 package pkg411iss;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 
 /**
  * FXML Controller class
@@ -48,6 +50,20 @@ public class LocationPredictionController implements Initializable {
     
     @FXML
     public void lookUpTime(){
+        ISSProvider iss = new ISSProvider();
+        try{
+            //********these have example fields, map them to the correct ones.********************************
+            //********need to match the values the user inputs***************
+        RiseTime riseTime = iss.nextPass("60","60");
+        
+        System.out.println("Rise Time" + riseTime.getDateTime());
+        
+        }catch(IOException | ParseException ex){
+            ex.printStackTrace();
+        }
+        
+        //************************Add input sanitization here, only numbers allowed in string******************************
+        
         
     }
     

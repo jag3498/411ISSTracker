@@ -39,6 +39,7 @@ public class FXMLDocumentController implements Initializable {
     Position pos;
     private Stage mainStage;
     private NavCntl theNavCntl;
+    private Timeline timeline;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,15 +58,25 @@ public class FXMLDocumentController implements Initializable {
         }
         mapImage.setImage(img);
 
-        Timeline timeline = new Timeline(
+        startTimeLine();
+    }
+    
+    private void startTimeLine(){
+        timeline = new Timeline(
                 new KeyFrame(Duration.seconds(5), (ActionEvent actionEvent) -> {
                     update();
                 }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
+    }
+    
+    private void stopTimeLine(){
+        timeline.stop();
     }
 
+    /**
+     * updates the UI latitude and longitude values.
+     */
     public void update() {
         ISSProvider iss = new ISSProvider();
         try {
@@ -97,6 +108,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void loadTimeUntilPass(){
+        stopTimeLine();
         mainStage = (Stage) latitude.getScene().getWindow();
         theNavCntl = new NavCntl(mainStage,"LocationPrediciton"); 
     }

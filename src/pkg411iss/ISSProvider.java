@@ -13,6 +13,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
@@ -74,11 +75,11 @@ public class ISSProvider {
         int status = con.getResponseCode();
 
         String inputLine;
-        try (BufferedReader in = new BufferedReader(
+        try (BufferedReader search = new BufferedReader(
                 new InputStreamReader(con.getInputStream()))) {
             StringBuilder content = new StringBuilder();
 
-            inputLine = in.readLine();
+            inputLine = search.readLine();
             content.append(inputLine);
 
         }
@@ -86,11 +87,13 @@ public class ISSProvider {
         JSONParser parser = new JSONParser();
 
         Object parsed = parser.parse(inputLine);
-
+        //JSONObject jsonObject = (JSONObject) parsed;
+        //JSONArray jasonArray = jsonObject.getJSONArray("response");
         JSONObject jsonObject = (JSONObject) parsed;
-        JSONObject jsonChildObject = (JSONObject) jsonObject.get("response");
-
-        String newTime = (String) jsonChildObject.get("risetime");
+        JSONArray jsonArray = (JSONArray) jsonObject.get("response");
+        Object jsonArrayMember = jsonArray.get(0);
+        System.out.println(jsonArrayMember);
+        String newTime = (String) jsonArrayMember;
         
         RiseTime riseTime = new RiseTime(newTime);
         
